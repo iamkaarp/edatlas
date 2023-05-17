@@ -31,7 +31,7 @@ class SystemFactory extends Factory
             'faction_id' => 0,
             'population' => $this->faker->numberBetween(0, 999999999),
             'government' => $this->faker->randomElement(['Anarchy', 'Communism', 'Confederacy', 'Cooperative', 'Corporate', 'Democracy', 'Dictatorship', 'Feudal', 'Imperial', 'Patronage', 'Prison Colony', 'Theocracy']),
-            'allegiance' => $this->faker->randomElement(['Alliance', 'Empire', 'Federation', 'Independent']),
+            'allegiance' => $this->faker->randomElement(['Alliance', 'Empire', 'Federation', 'Independent', 'Thargoid']),
             'powers' => json_encode([$this->faker->randomElement(['Aisling Duval', 'Archon Delaine', 'Arissa Lavigny-Duval', 'Denton Patreus', 'Edmund Mahon', 'Felicia Winters', 'Li Yong-Rui', 'Pranav Antal', 'Yuri Grom', 'Zachary Hudson', 'Zemina Torval'])]),
             'pps' => $this->faker->randomElement(['Control', 'Exploited', 'Contested']),
             'security' => $this->faker->randomElement(['Low', 'Medium', 'High']),

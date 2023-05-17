@@ -88,7 +88,7 @@
         </tr>
       </tbody>
     </Table>
-    <Pagination v-if="systems.length > 0" :meta="meta" :lastPage="lastPage" />
+    <!--<Pagination v-if="systems.length > 0" :meta="meta" :lastPage="lastPage" />-->
   </Default>
 </template>
 

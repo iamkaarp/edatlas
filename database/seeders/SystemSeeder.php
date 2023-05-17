@@ -23,7 +23,25 @@ class SystemSeeder extends Seeder
         $systems = System::all();
 
         $systems->each(function ($system) use ($faker) {
-            $factions = Faction::factory()->count(5)->create(['system_id' => $system->id]);
+            $factions = Faction::factory()->count(5)->make();
+            $f = collect($factions)->map(function($n) use ($system) {
+                $activeStates = isset($n->active_states) ? join(',',array_map(fn($f) => $f, $n->active_states)) : null;
+                $pendingStates = isset($n->pending_states) ? join(',',array_map(fn($f) =>$f, $n->pending_states)) : null;
+                $recoveringStates = isset($n->recovering_states) ? join(',',array_map(fn($f) => $f, $n->recovering_states)) : null;
+                return [
+                    'system_id' => $system->id,
+                    'name' => $n->name,
+                    'allegiance' => $n->allegiance,
+                    'government' => $n->government,
+                    'state' => $n->state,
+                    'influence' => $n->influence,
+                    'happiness' => $n->happiness != "" ? $n->happiness : "",
+                    'active_states' => $activeStates,
+                    'pending_states' => $pendingStates,
+                    'recovering_states' => $recoveringStates,
+                ];
+            })->toArray();
+            $system->factions()->createMany($f);
             $faction = Faction::where('system_id', $system->id)->orderBy('influence', 'desc')->first();
             $system->update(['faction_id' => $faction->id]);
             $system->save();

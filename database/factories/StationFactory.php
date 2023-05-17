@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Providers\ED;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -25,7 +26,7 @@ class StationFactory extends Factory
             'allegiance' => $this->faker->randomElement(['Alliance', 'Empire', 'Federation', 'Independent']),
             'government' => $this->faker->randomElement(['Anarchy', 'Communism', 'Confederacy', 'Cooperative', 'Corporate', 'Democracy', 'Dictatorship', 'Feudal', 'Imperial', 'Patronage', 'Prison Colony', 'Theocracy']),
             'economy' => $this->faker->randomElement(['Agriculture', 'Colony', 'Extraction', 'High Tech', 'Industrial', 'Military', 'Refinery', 'Service', 'Terraforming', 'Tourism', 'None']),
-            'state' => $this->faker->randomElement(['UnderAttack', null]),
+            'state' => $this->faker->randomElement(['Under Attack', 'Damaged', 'Repair', '']),
             'landing_pads' => json_encode([
                 'large' => $this->faker->numberBetween(0, 10),
                 'medium' => $this->faker->numberBetween(0, 10),

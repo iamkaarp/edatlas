@@ -132,7 +132,7 @@ const pageGenerator = () => {
   const minLeft = Number(props.meta.current_page) >= props.lastPage ? props.lastPage - 9 : left
   const maxRight = right >= 10 ? right + 1 : 10
   const maxCount =
-    Number(props.meta.current_page) + maxSides > Number(props.meta.current_page)
+    Number(props.meta.current_page) + maxSides < Number(props.meta.current_page)
       ? props.lastPage
       : Number(props.meta.current_page) + maxSides
   for (let i = Number(props.meta.current_page) - maxSides; i <= maxCount; i++) {
