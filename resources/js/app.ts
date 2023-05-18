@@ -47,6 +47,7 @@ createInertiaApp({
     }
   },
   progress: {
+    // @ts-ignore
     color: fullConfig.theme?.colors?.anzac[500],
   },
 })

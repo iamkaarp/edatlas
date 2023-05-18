@@ -39,7 +39,7 @@ class HTTP {
         })
       )
       return systems.data
-    } catch (e) {
+    } catch (e: any | AxiosError) {
       return e.response.data
     }
   }
