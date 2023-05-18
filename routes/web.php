@@ -26,8 +26,24 @@ Route::get('/systems/{page?}', function ($page = null) {
 })->whereNumber('page')->name('systems.index');
 
 Route::get('/systems/{name?}', function ($name) {
-    return Inertia::render('Systems/Show', [ 'name' => $name ]);    
+    return Inertia::render('Systems/Show/Index', [ 'name' => $name ]);    
 })->name('systems.show');
+
+Route::get('/systems/{name?}/edit', function ($name) {
+    return Inertia::render('Systems/Show/Edit', [ 'name' => $name ]);    
+})->name('systems.show.edit');
+
+Route::get('/systems/{name?}/stations', function ($name) {
+    return Inertia::render('Systems/Show/Stations', [ 'name' => $name ]);    
+})->name('systems.show.stations');
+
+Route::get('/systems/{name?}/bodies', function ($name) {
+    return Inertia::render('Systems/Show/Bodies', [ 'name' => $name ]);    
+})->name('systems.show.bodies');
+
+Route::get('/systems/{name?}/map', function ($name) {
+    return Inertia::render('Systems/Show/Map', [ 'name' => $name ]);    
+})->name('systems.show.map');
 
 Route::get('/stations', function () {
     return Inertia::render('Home');

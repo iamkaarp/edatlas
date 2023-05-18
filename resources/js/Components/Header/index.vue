@@ -33,6 +33,7 @@
           <li v-for="item in menuItems" :key="item.title">
             <div v-if="!item.hasOwnProperty('children')">
               <Link
+                v-if="item.visible"
                 :href="route(item.link)"
                 class="block py-2 pl-3 pr-4 rounded text-neutral-900 hover:bg-neutral-100 md:hover:bg-transparent md:border-0 md:hover:text-anzac-700 md:p-0 dark:text-white md:dark:hover:text-anzac-500 dark:hover:bg-neutral-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 aria-current="page">
@@ -41,6 +42,7 @@
             </div>
             <div v-else>
               <button
+                v-if="item.visible"
                 id="dropdownNavbarLink"
                 data-dropdown-toggle="dropdownNavbar"
                 class="flex items-center justify-between w-full py-2 pl-3 pr-4 border-b text-neutral-700 border-neutral-100 hover:bg-neutral-50 md:hover:bg-transparent md:border-0 md:hover:text-anzac-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-anzac-500 dark:focus:text-white dark:border-neutral-700 dark:hover:bg-neutral-700 md:dark:hover:bg-transparent">
@@ -97,17 +99,19 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
+import { onMounted, ref, Ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import { initDropdowns } from 'flowbite'
 import Icon from '../../../images/Icon.svg'
 import { useSettings } from '@/store/settings'
+import { configCatClient } from '@/plugins'
 
 const store = useSettings()
 
 interface MenuItem {
   title: string
   link: string
+  visible: boolean
   children?: MenuItem[]
 }
 
@@ -115,40 +119,49 @@ const menuItems: MenuItem[] = [
   {
     title: 'Systems',
     link: 'systems.index',
+    visible: true,
   },
   {
     title: 'Stations',
     link: 'stations',
+    visible: true,
   },
   {
     title: 'Market',
     link: 'market',
+    visible: true,
     children: [
       {
         link: 'market.commodities',
         title: 'Commodities',
+        visible: true,
       },
       {
         link: 'market.rare-commodities',
         title: 'Rare Commodities',
+        visible: true,
       },
       {
         link: 'market.traderoutes',
         title: 'Trade Routes',
+        visible: true,
       },
     ],
   },
   {
     title: 'Shipyard',
     link: 'shipyard',
+    visible: true,
   },
   {
     title: 'Outfitting',
     link: 'outfitting',
+    visible: true,
   },
   {
     title: 'Galaxy Map',
     link: 'galaxy',
+    visible: true,
   },
 ]
 

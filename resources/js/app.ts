@@ -10,12 +10,16 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from '../../tailwind.config.js'
 import { useSettings } from './store/settings'
+import * as configcat from 'configcat-js'
 const fullConfig = resolveConfig(tailwindConfig)
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'ED Atlas'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
+
+const useLogging = true
+const key = import.meta.env.VITE_CONFIGCAT_SDK
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
@@ -25,11 +29,17 @@ createInertiaApp({
       import.meta.glob<DefineComponent>('./Pages/**/*.vue')
     ),
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .use(ZiggyVue, Ziggy)
-      .use(pinia)
-      .mount(el)
+    const app = createApp({ render: () => h(App, props) })
+    app.use(plugin)
+    app.use(ZiggyVue, Ziggy)
+    app.use(pinia)
+    app.mount(el)
+
+    const logger = useLogging ? configcat.createConsoleLogger(configcat.LogLevel.Warn) : null
+    const configCatClient = configcat.getClient(key, configcat.PollingMode.AutoPoll, {
+      logger: logger,
+    })
+    app.config.globalProperties.$configCat = configCatClient
 
     const settings = useSettings()
     if (localStorage.getItem('settings') === null) {

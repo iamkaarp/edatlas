@@ -3,7 +3,7 @@
     <div class="flex-col mb-6">
       <div class="flex-col">
         <label
-          class="flex w-full p-2 text-sm border rounded-lg text-neutral-900 border-neutral-300 bg-neutral-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          class="flex w-full p-2 text-sm border rounded-sm text-neutral-900 border-neutral-300 bg-neutral-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <div v-if="systemFilters.length" class="flex">
             <span
               v-for="filter in systemFilters"
@@ -88,7 +88,7 @@
         </tr>
       </tbody>
     </Table>
-    <!--<Pagination v-if="systems.length > 0" :meta="meta" :lastPage="lastPage" />-->
+    <Pagination v-if="systems.length > 0" :meta="meta" :lastPage="lastPage" />
   </Default>
 </template>
 

@@ -49,6 +49,7 @@ class SystemProvider extends ServiceProvider
         $system->save();
 
         if(property_exists($payload, 'factions') && $payload->factions != null) {
+            $system->factions()->delete();
             $factions = array_map(function ($n) use ($system) {
                 $activeStates = isset($n->active_states) ? join(',',array_map(fn($f) => ED::$factionState[$f], $n->active_states)) : null;
                 $pendingStates = isset($n->pending_states) ? join(',',array_map(fn($f) => ED::$factionState[$f], $n->pending_states)) : null;
@@ -67,7 +68,7 @@ class SystemProvider extends ServiceProvider
                 ];
             }, $payload->factions);
 
-            $faction = $system->factions()->upsert($factions, ['name', 'system_id']);
+            $faction = $system->factions()->createMany($factions);
             
             $factions = Faction::where('system_id', $system->id)->get();
 
@@ -80,7 +81,7 @@ class SystemProvider extends ServiceProvider
                 ]);
             }
 
-            $factionId = $system->factions->where('name', $payload->system->faction->name)->first();
+            $factionId = $faction->where('name', $payload->system->faction->name)->where('system_id', $system->id)->first();
             
             $system->faction_id = $factionId->id ?? 0;
             $system->save();
