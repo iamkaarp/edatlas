@@ -21,7 +21,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-versions }}
       - name: Install dependencies
-        run: npm ci
+        run: |
+          echo npm -v
+          echo node -v
+          npm ci
       - name: Build
         run: npm run build
       - name: Archive artifacts
