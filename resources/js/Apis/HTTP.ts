@@ -9,9 +9,10 @@ class HTTP {
     },
   })
 
-  private root = `${string.pluralize(this.constructor.name.toLowerCase())}.api`
+  public root = `http.api`
 
   public async index(page: number = 1, column: string = 'id', order: string = 'asc'): Promise<any> {
+    console.log(this.root)
     const systems = await this.http.get(
       route(`${this.root}.index`, { page: page, sort: column, order: order })
     )

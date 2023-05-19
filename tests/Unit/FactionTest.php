@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 use App\Models\System;
@@ -10,7 +10,7 @@ use App\Models\Faction;
 
 class FactionTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     
     public function test_faction_can_be_created(): void
     {

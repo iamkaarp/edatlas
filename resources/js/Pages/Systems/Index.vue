@@ -164,6 +164,7 @@ onMounted(async () => {
   } else {
     source.value = 'all'
   }
+  console.log('fetch data')
   fetchData()
 })
 

@@ -3,13 +3,13 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 use App\Models\System;
 
 class SystemTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * A basic unit test example.
      */

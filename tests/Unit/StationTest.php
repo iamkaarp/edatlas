@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 use App\Models\System;
 use App\Models\Station;
@@ -12,7 +12,7 @@ use App\Models\Faction;
 class StationTest extends TestCase
 {
 
-    use RefreshDatabase;
+    use DatabaseMigrations;
     
     public function test_station_can_be_created(): void
     {
